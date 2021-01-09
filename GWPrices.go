@@ -18,6 +18,10 @@ func getData(w http.ResponseWriter, r *http.Request) {
 	URL := r.URL.Query().Get("url")
 	if URL == "" {
 		log.Println("missing URL argument")
+		s := []string{"Missing URL Argument"}
+		w.Header().Add("Content-Type", "application/json")
+		jsonValue, _ := json.Marshal(s)
+		w.Write(jsonValue)
 		return
 	}
 	log.Println("visiting", URL)
